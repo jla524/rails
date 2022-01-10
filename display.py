@@ -1,3 +1,8 @@
+"""
+Lane detection system
+https://medium.com/analytics-vidhya/building-a-lane-detection-system-f7a727c6694
+"""
+
 import sys
 import cv2
 import numpy as np
