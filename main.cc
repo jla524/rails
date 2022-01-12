@@ -6,7 +6,8 @@ cv::Mat process(cv::Mat image) {
     cv::Mat edges = findEdges(processed);
     cv::Mat region = mask(edges);
     std::vector<cv::Vec4i> lines = findLines(region);
-    return region;
+    std::vector<int> average = findAverage(image, lines);
+    return image;
 }
 
 int main(int argc, char **argv) {
