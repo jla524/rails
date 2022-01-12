@@ -9,7 +9,7 @@ cv::Mat grayscale(cv::Mat image) {
 
 cv::Mat blur(cv::Mat image) {
     cv::Mat blurredImage;
-    cv::GaussianBlur(image, blurredImage, cv::Size(5, 5), 0);
+    cv::GaussianBlur(image, blurredImage, cv::Size(7, 7), 0);
     return blurredImage;
 }
 
@@ -37,7 +37,7 @@ cv::Mat findEdges(cv::Mat image) {
 
 std::vector<cv::Vec4i> findLines(cv::Mat image) {
     std::vector<cv::Vec4i> lines;
-    HoughLinesP(image, lines, 2, CV_PI / 180, 100, 30, 5);
+    HoughLinesP(image, lines, 2, CV_PI / 180, 100, 20, 5);
     return lines;
 }
 
@@ -59,9 +59,9 @@ std::vector<int> makePoints(cv::Mat image, std::vector<std::vector<double>> coef
     return points;
 }
 
-std::vector<int> findAverage(cv::Mat image, std::vector<cv::Vec4i> lines) {
+std::vector<std::vector<int>> findAverage(cv::Mat image, std::vector<cv::Vec4i> lines) {
     if (lines.empty())
-        return std::vector<int>();
+        return std::vector<std::vector<int>>();
     std::vector<std::vector<double>> left_coeffs, right_coeffs;
     for (cv::Vec4i line : lines) {
         std::vector<double> x, y;
@@ -75,8 +75,20 @@ std::vector<int> findAverage(cv::Mat image, std::vector<cv::Vec4i> lines) {
         else
             right_coeffs.push_back(coeff);
     }
-    std::vector<int> left = makePoints(image, left_coeffs);
-    std::vector<int> right = makePoints(image, right_coeffs);
-    left.insert(left.end(), right.begin(), right.end());
-    return left;
+    std::vector<std::vector<int>> points;
+    points.push_back(makePoints(image, left_coeffs));
+    points.push_back(makePoints(image, right_coeffs));
+    return points;
+}
+
+cv::Mat showLines(cv::Mat image, std::vector<std::vector<int>> lines) {
+    cv::Mat linedImage = cv::Mat::zeros(image.rows, image.cols, image.type());
+    if (lines.empty())
+        return linedImage;
+    for (std::vector<int> line : lines) {
+        cv::Point pt1 = cv::Point(line[0], line[1]);
+        cv::Point pt2 = cv::Point(line[2], line[3]);
+        cv::line(linedImage, pt1, pt2, cv::Scalar(0, 255, 0), 10);
+    }
+    return linedImage;
 }

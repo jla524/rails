@@ -8,4 +8,5 @@ cv::Mat mask(cv::Mat image);
 cv::Mat findEdges(cv::Mat image);
 std::vector<cv::Vec4i> findLines(cv::Mat image);
 std::vector<int> makePoints(cv::Mat image, std::vector<std::vector<double>> coeffs);
-std::vector<int> findAverage(cv::Mat image, std::vector<cv::Vec4i> lines);
+std::vector<std::vector<int>> findAverage(cv::Mat image, std::vector<cv::Vec4i> lines);
+cv::Mat showLines(cv::Mat image, std::vector<std::vector<int>> lines);

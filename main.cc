@@ -6,8 +6,11 @@ cv::Mat process(cv::Mat image) {
     cv::Mat edges = findEdges(processed);
     cv::Mat region = mask(edges);
     std::vector<cv::Vec4i> lines = findLines(region);
-    std::vector<int> average = findAverage(image, lines);
-    return image;
+    std::vector<std::vector<int>> average = findAverage(image, lines);
+    cv::Mat blackLines = showLines(image, average);
+    cv::Mat rails;
+    cv::addWeighted(image, 0.8, blackLines, 1, 1, rails);
+    return rails;
 }
 
 int main(int argc, char **argv) {
