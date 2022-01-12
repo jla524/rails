@@ -86,8 +86,8 @@ def make_points(image, average):
 
 
 def process(image):
-    gray_image = gray(image)
-    edges = cv2.Canny(gray_image, 50, 150)
+    processed = gauss(gray(image))
+    edges = cv2.Canny(processed, 50, 150)
     isolated = region(edges)
     lines = cv2.HoughLinesP(isolated, 2, np.pi/180, 100, np.array([]), minLineLength=30, maxLineGap=5)
     averaged_lines = average(image, lines)
