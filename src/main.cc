@@ -1,6 +1,9 @@
 #include <iostream>
-#include <opencv2/opencv.hpp>
 #include "detect.h"
+
+cv::Mat process(cv::Mat image) {
+    cv::Mat processed = blur(grayscale(image));
+}
 
 int main(int argc, char **argv) {
     std::string path;

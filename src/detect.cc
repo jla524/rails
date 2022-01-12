@@ -1,10 +1,9 @@
-#include <opencv2/imgproc.hpp>
 #include "detect.h"
 
 cv::Mat grayscale(cv::Mat image) {
-    cv::Mat greyImage;
-    cv::cvtColor(image, greyImage, cv::COLOR_BGR2GRAY);
-    return greyImage;
+    cv::Mat grayImage;
+    cv::cvtColor(image, grayImage, cv::COLOR_BGR2GRAY);
+    return grayImage;
 }
 
 cv::Mat blur(cv::Mat image) {
@@ -33,4 +32,10 @@ cv::Mat mask(cv::Mat image) {
     cv::Mat maskedImage;
     cv::bitwise_and(image, mask, maskedImage);
     return maskedImage;
+}
+
+std::vector<cv::Vec4i> getLines(cv::Mat image) {
+    std::vector<cv::Vec4i> lines;
+    HoughLinesP(image, lines, 2, CV_PI / 180, 80, 30, 5);
+    return lines;
 }
