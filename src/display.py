@@ -2,13 +2,11 @@
 Lane detection system
 https://medium.com/analytics-vidhya/building-a-lane-detection-system-f7a727c6694
 """
-
-import sys
 import cv2
 import numpy as np
 
 
-def grey(image):
+def gray(image):
     #convert to grayscale
     image = np.asarray(image)
     return cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
@@ -47,7 +45,7 @@ def display_lines(image, lines):
         for line in lines:
             x1, y1, x2, y2 = line
             #draw lines on a black image
-            cv2.line(lines_image, (x1, y1), (x2, y2), (255, 0, 0), 10)
+            cv2.line(lines_image, (x1, y1), (x2, y2), (0, 255, 0), 10)
     return lines_image
 
 
@@ -88,7 +86,8 @@ def make_points(image, average):
 
 
 def process(image):
-    edges = cv2.Canny(image, 50, 150)
+    gray_image = gray(image)
+    edges = cv2.Canny(gray_image, 50, 150)
     isolated = region(edges)
     lines = cv2.HoughLinesP(isolated, 2, np.pi/180, 100, np.array([]), minLineLength=30, maxLineGap=5)
     averaged_lines = average(image, lines)
@@ -98,8 +97,7 @@ def process(image):
 
 
 if __name__ == '__main__':
-    path = sys.argv[1] if len(sys.argv) > 1 else 'videos/test_countryroad.mp4'
-    cap = cv2.VideoCapture(path)
+    cap = cv2.VideoCapture('../videos/test_countryroad.mp4')
     while cap.isOpened():
         ret, frame = cap.read()
         if not ret:
