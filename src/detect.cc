@@ -12,12 +12,6 @@ cv::Mat blur(cv::Mat image) {
     return blurredImage;
 }
 
-cv::Mat detectEdges(cv::Mat image) {
-    cv::Mat edges;
-    Canny(image, edges, 50, 100, 5);
-    return edges;
-}
-
 cv::Mat mask(cv::Mat image) {
     int height = image.rows;
     int width = image.cols;
@@ -27,14 +21,20 @@ cv::Mat mask(cv::Mat image) {
     triangle.push_back(cv::Point(width, height));
     std::vector<std::vector<cv::Point>> points;
     points.push_back(triangle);
-    cv::Mat mask = cv::Mat(height, width, image.type());
+    cv::Mat mask = cv::Mat::zeros(height, width, image.type());
     cv::fillPoly(mask, points, cv::Scalar(255));
     cv::Mat maskedImage;
     cv::bitwise_and(image, mask, maskedImage);
     return maskedImage;
 }
 
-std::vector<cv::Vec4i> getLines(cv::Mat image) {
+cv::Mat findEdges(cv::Mat image) {
+    cv::Mat edges;
+    Canny(image, edges, 50, 100, 5);
+    return edges;
+}
+
+std::vector<cv::Vec4i> findLines(cv::Mat image) {
     std::vector<cv::Vec4i> lines;
     HoughLinesP(image, lines, 2, CV_PI / 180, 80, 30, 5);
     return lines;
