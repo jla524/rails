@@ -1,5 +1,5 @@
 #include "detect.h"
-#include "Polyfit/PolyfitEigen.hpp"
+#include "polyfit.h"
 
 cv::Mat grayscale(cv::Mat image) {
     cv::Mat grayImage;
@@ -69,7 +69,7 @@ std::vector<std::vector<int>> findAverage(cv::Mat image, std::vector<cv::Vec4i> 
         x.push_back(line[2]);
         y.push_back(line[1]);
         y.push_back(line[3]);
-        std::vector<double> coeff = polyfit_Eigen(x, y, 1);
+        std::vector<double> coeff = polyfit(x, y, 1);
         if (coeff[1] < 0)
             left_coeffs.push_back(coeff);
         else
