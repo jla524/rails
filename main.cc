@@ -8,8 +8,7 @@ cv::Mat process(cv::Mat image) {
     std::vector<cv::Vec4i> lines = findLines(region);
     std::vector<std::vector<int>> average = findAverage(image, lines);
     cv::Mat blackLines = showLines(image, average);
-    cv::Mat rails;
-    cv::addWeighted(image, 0.8, blackLines, 1, 1, rails);
+    cv::Mat rails = combineImages(image, 0.8, blackLines, 1);
     return rails;
 }
 
