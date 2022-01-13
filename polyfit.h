@@ -1,3 +1,5 @@
+// Adapted from https://github.com/patLoeber/Polyfit/blob/master/PolyfitEigen.hpp
+
 #include <iostream>
 #include "eigen3/Eigen/Dense"
 

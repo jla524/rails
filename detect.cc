@@ -1,3 +1,5 @@
+// Adapted from https://medium.com/analytics-vidhya/building-a-lane-detection-system-f7a727c6694
+
 #include "detect.h"
 #include "polyfit.h"
 
