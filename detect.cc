@@ -37,7 +37,7 @@ cv::Mat findEdges(cv::Mat image) {
 
 std::vector<cv::Vec4i> findLines(cv::Mat image) {
     std::vector<cv::Vec4i> lines;
-    HoughLinesP(image, lines, 2, CV_PI / 180, 330, 50, 5);
+    HoughLinesP(image, lines, 2, CV_PI / 180, 370, 50, 5);
     return lines;
 }
 
@@ -91,4 +91,10 @@ cv::Mat showLines(cv::Mat image, std::vector<std::vector<int>> lines) {
         cv::line(linedImage, pt1, pt2, cv::Scalar(0, 255, 0), 10);
     }
     return linedImage;
+}
+
+cv::Mat combineImages(cv::Mat image1, double weight1, cv::Mat image2, double weight2) {
+    cv::Mat combined;
+    cv::addWeighted(image1, weight1, image2, weight2, 1, combined);
+    return combined;
 }
