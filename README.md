@@ -6,7 +6,7 @@ A lane detection system built with C++ and OpenCV.
    ```
    brew install opencv
    ```
-2. Run the program
+2. Compile and run the program
    ```
    make && ./run.sh
    ```
