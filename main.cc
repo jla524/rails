@@ -1,4 +1,5 @@
 #include <iostream>
+#include "process.h"
 #include "detect.h"
 
 cv::Mat process(cv::Mat image) {
