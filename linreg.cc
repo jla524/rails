@@ -1,6 +1,5 @@
-// Adapted from // https://stackoverflow.com/questions/5083465/fast-efficient-least-squares-fit-algorithm-in-c
-#include <iostream>
-#include <vector>
+// Adapted from https://stackoverflow.com/questions/5083465/fast-efficient-least-squares-fit-algorithm-in-c
+#include "linreg.h"
 
 std::vector<double> linreg(const std::vector<double> &x, const std::vector<double> &y) {
     int n = x.size();
