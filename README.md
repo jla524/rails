@@ -1,7 +1,7 @@
 # Rails
 A lane detection system built with C++ and OpenCV.
 
-![screenshot][0]
+<img src="https://user-images.githubusercontent.com/39754370/152469024-4ca253b1-2d78-471a-b03c-f9f129356a75.png" alt="screenshot" width="400"/>
 
 ## Quickstart Guide
 1. Install OpenCV
@@ -23,7 +23,6 @@ A lane detection system built with C++ and OpenCV.
 [Polyfit][4]
 
 
-[0]: https://user-images.githubusercontent.com/39754370/152469024-4ca253b1-2d78-471a-b03c-f9f129356a75.png
 [1]: https://medium.com/analytics-vidhya/building-a-lane-detection-system-f7a727c6694
 [2]: https://docs.opencv.org/4.5.5/
 [3]: https://github.com/geohot/twitchslam
