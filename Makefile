@@ -1,8 +1,8 @@
 CC=g++
 LINKER:=$(shell pkg-config --cflags --libs /usr/local/Cellar/opencv/4.5.4_3/lib/pkgconfig/opencv4.pc)
 CFLAGS=$(LINKER) -std=c++11
-DEPS=detect.h linreg.h
-OBJ=main.o detect.o process.o linreg.o
+DEPS=src/detect.h src/process.h src/linreg.h
+OBJ=src/main.o src/detect.o src/process.o src/linreg.o
 
 %.o: %.cc
 	$(CC) -c -o $@ $< $(CFLAGS)

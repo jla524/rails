@@ -2,7 +2,7 @@
 #include "process.h"
 #include "detect.h"
 
-cv::Mat process(cv::Mat image) {
+cv::Mat show_rails(cv::Mat image) {
     cv::Mat processed = blur(grayscale(image));
     cv::Mat edges = findEdges(processed);
     cv::Mat region = mask(edges);
@@ -29,7 +29,7 @@ int main(int argc, char **argv) {
         cap >> frame;
         if (frame.empty())
             break;
-        imshow("Frame", process(frame));
+        imshow("Frame", show_rails(frame));
         // Press q to exit
         if (cv::waitKey(25) == 113)
             break;
